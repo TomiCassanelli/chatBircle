@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core.settings import Settings
@@ -13,11 +13,22 @@ documents = SimpleDirectoryReader("data").load_data()
 index = VectorStoreIndex.from_documents(documents)
 query_engine = index.as_query_engine()
 
-query = "¿Que forma tiene el sombrero?"
-response = query_engine.query(query)
-print(response) 
+# query = "¿Que forma tiene el sombrero?"
+# response = query_engine.query(query)
+# print(response) 
 
 # Defino la ruta de entrada, algo basico, luego veo si lo cambio o lo saco
 @app.get("/")
 def root():
     return {"message": "Hello World"}
+
+@app.get("/query")
+def ask(q: str):
+    try:
+        response = query_engine.query(q)
+        answer = response.response
+
+    except HTTPException:
+        raise
+    
+    return {"answer": answer}
