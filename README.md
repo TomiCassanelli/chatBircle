@@ -11,10 +11,10 @@ Investigando, la libreria de Llama solicitaba una ApiKey de OpenAI (los errores 
 
 ## Comandos utilizados para backend
 - Comando para crear el environment virtual (solo una vez): python -m venv venv
-- Comando para iniciar el environment virtual: .\venv\Scripts\Activate.ps1
+- Comando para iniciar el environment virtual (desde root): .\venv\Scripts\Activate.ps1
 - Comando para salir del environment virtual: deactivate
 - Comando para instalar las librerias necesarias: pip install -r requirements.txt
-- Comando para levantar la API: uvicorn main:app --reload
+- Comando para levantar la API (desde app): uvicorn main:app --reload
 
 ## Comandos utilizados para frontend
 - Comando para crear el proyecto de next.js: npx create-next-app@latest frontend
