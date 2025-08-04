@@ -2,7 +2,7 @@
 
 import { Box } from "@mui/material";
 import { Message } from "../types/message";
-import { BubbleMessage } from "./bubbleMessage";
+import { BubbleMessage } from "./BubbleMessage";
 
 type Props = {
     messages: Message[];

@@ -14,7 +14,7 @@ export const Footer = ({ onSubmit }: Props) => {
     const [value, setValue] = useState("");
 
     const toSend = () => {
-        if (value.trim() === "") {setValue(""); return;}
+        if (value.trim() === "") { setValue(""); return; }
         onSubmit(value);
         setValue("");
     };
@@ -45,16 +45,18 @@ export const Footer = ({ onSubmit }: Props) => {
                     maxRows={3}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
-                    sx={{ background: "white", borderRadius: 3 }}
+                    sx={{
+                        background: "white", borderRadius: 3
+                    }}
                 />
             </Box>
 
             <Box >
-                <Fab onClick={toSend}>
+                <Fab onClick={toSend} sx={{ boxShadow: "none", }}>
                     <SendIcon />
                 </Fab>
             </Box>
 
-        </Box>
+        </Box >
     );
 };

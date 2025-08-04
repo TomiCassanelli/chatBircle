@@ -33,7 +33,7 @@ export const ChatSection = () => {
                 height: "100%",
                 width: { xl: "40%", lg: "50%", md: "75%", xs: "100%" },
                 position: "relative",
-                bgcolor: "black",
+                bgcolor: '#373737ff',
                 boxShadow: 3,
                 p: 1,
                 borderRadius: 2,
