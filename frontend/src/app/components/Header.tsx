@@ -2,6 +2,8 @@
 
 import { Box, Typography } from "@mui/material";
 
+// Muestra el encabezado del chat con logo y nombre
+
 export const Header = () => {
     return (
         <Box

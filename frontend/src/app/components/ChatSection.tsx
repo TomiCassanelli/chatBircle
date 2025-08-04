@@ -8,6 +8,9 @@ import { useState } from "react";
 import { MessagesList } from "./MessagesList";
 import { useGetMessage } from "../hooks/useMessage";
 
+// Mantiene el estado de los mensajes llamando al hook para obtener respuesta.
+// Arma la interfaz con header encima, lista y footer debajo.
+
 export const ChatSection = () => {
     const hook = useGetMessage();
 
@@ -17,9 +20,9 @@ export const ChatSection = () => {
 
     const handleSubmit = async (text: string) => {
         setMessages((prev) => [...prev, { text, sender: "user" }]);
-
         const response = await hook.fetchMessage(text);
-        setMessages((prev) => [...prev, { text: response.answer, sender: "ai" }]);
+
+        setMessages((prev) => [...prev, { text: response.text, sender: "ai" }]);
     };
 
     return (
@@ -35,8 +38,7 @@ export const ChatSection = () => {
                 p: 1,
                 borderRadius: 2,
                 gap: 1
-            }
-            }
+            }}
         >
 
             <Header />
@@ -44,14 +46,14 @@ export const ChatSection = () => {
             <Box
                 sx={{
                     flexGrow: 1,
-                    overflow: "auto",
                     minHeight: 0,
                     bgcolor: 'white',
                     borderRadius: 3,
                     p: 1
                 }}
             >
-                <MessagesList messages={messages} />
+                <MessagesList messages={messages} loading={hook.loading} />
+
             </Box>
 
             <Footer onSubmit={handleSubmit} />

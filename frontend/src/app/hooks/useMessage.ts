@@ -1,16 +1,23 @@
 "use client";
 
+import { useState } from "react";
 import { getMessage } from "../services/chat.service";
 
+
+// Hook que maneja estado de carga y dispara la consulta al servicio.
+
 export const useGetMessage = () => {
+  const [loading, setLoading] = useState(false);
+
   const fetchMessage = async (query: string) => {
-    // console.log("Mensaje del Usuario:", query);
-
-    const response = await getMessage(query);
-    // console.log("Respuesta de AI:", response);
-
-    return response;
+    setLoading(true);
+    try {
+      const response = await getMessage(query);
+      return response;
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return { fetchMessage };
+  return { fetchMessage, loading };
 };

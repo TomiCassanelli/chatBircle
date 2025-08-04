@@ -1,4 +1,5 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core.settings import Settings
@@ -14,10 +15,6 @@ documents = SimpleDirectoryReader("data").load_data()
 index = VectorStoreIndex.from_documents(documents)
 query_engine = index.as_query_engine()
 
-# query = "¿Que forma tiene el sombrero?"
-# response = query_engine.query(query)
-# print(response) 
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -28,11 +25,17 @@ app.add_middleware(
 
 @app.get("/query")
 def ask(q: str):
+    if q == "error":
+        return JSONResponse(status_code=500, content={
+            "message": "Este error es generado para testeo"
+        })
+
     try:
         response = query_engine.query(q)
         answer = response.response
-
-    except HTTPException:
-        raise
+        return {"answer": answer}
     
-    return {"answer": answer}
+    except Exception as e:
+        return JSONResponse(status_code=500, content={
+            "message": "Error interno al procesar la consulta.",
+        })

@@ -8,11 +8,13 @@ type Props = {
     onSubmit: (text: string) => void;
 };
 
+// Input donde se escribe y envia el mensaje con funcion que dispara onSubmit si contiene texto.
+
 export const Footer = ({ onSubmit }: Props) => {
     const [value, setValue] = useState("");
 
     const toSend = () => {
-        if (value === "") return;
+        if (value.trim() === "") {setValue(""); return;}
         onSubmit(value);
         setValue("");
     };

@@ -7,6 +7,8 @@ export type Props = {
     message: Message;
 };
 
+// Define el formato del mensaje con forma de burbuja y texto dentro.
+
 export const BubbleMessage = ({ message }: Props) => {
 
     return (
@@ -27,8 +29,8 @@ export const BubbleMessage = ({ message }: Props) => {
                     wordBreak: "break-word",
                 }}
             >
-                <Typography fontSize={18}>{message.text}</Typography>
+                <Typography>{message.text}</Typography>
             </Box>
-        </Box>
+        </Box >
     );
 };
