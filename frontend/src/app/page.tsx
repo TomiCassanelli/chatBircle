@@ -3,9 +3,6 @@
 import { Box } from "@mui/material";
 import { ChatSection } from "./components/ChatSection";
 
-// const apiUrl = 'http://localhost:8000';
-// console.log('API URL:', apiUrl);
-
 export default function Home() {
 
   return (
